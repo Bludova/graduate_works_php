@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+     <link rel="stylesheet" href="media/bootstrap/css/bootstrap.css"> <!-- CSS bootstrap -->
+      <link rel="stylesheet" href="media/bootstrap/css/main.css">  <!-- CSS main -->
+   <!--  <link rel="stylesheet" href="css/style.css">  --><!-- Resource style -->
+
+
+   <!--  <link rel="stylesheet" href="css/reset.css">  --><!-- CSS reset -->
+  <link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
+ <!-- <script src="js/modernizr.js"></script> -->  <!-- Modernizr -->
+
+    <title>Вопросы-Ответы!</title>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container">
+     <h1><a href="user.php">Вопросы-Ответы!</a></h1>
+<ul>
+    <li><a href="user.php?cat=ask_question">Задать вопрос</a></li>
+    <li><a href="user.php?cat=topics">Все темы</a></li>
+    <li><a href="user.php?cat=topics">Все вопросы</a></li>
+
+</ul>
+
+
+</div>
+</header>
+
+{% if cat == "ask_question" %}
+<section class="container">
+
+  <div class="question">
+        <h6>Задать вопрос</h6>
+  <!-- <p>Задать вопрос</p> -->
+        <p>{{send}}</p>
+          <p><form method="POST">
+                    <select name="categorie">
+{% for categorie in allCategories %}
+              <option value='{{categorie.id}}'>{{categorie["categorie"] }}</option>
+  {% endfor %}
+ </select>
+    <input type="text" name="nickname" placeholder="Nickname">
+    <input type="text" name="email" placeholder="email">
+  <input type="text" name="question" placeholder="Вопрос">
+ <input type="submit" name="send" value="Опублитковать вопрос">
+</form>
+
+</p>
+</div>
+</section>
+{% endif %}
+
+
+<section class="container">
+
+  <div class="topics">
+
+<ul>
+{% for categorie in allCategories %}
+<li><a href="#{{categorie.categorie}}">{{categorie["categorie"] }}</a></li>
+{% endfor %}
+  </ul>
+
+</div>
+
+
+<div class="questions">
+
+{% for categories in categorie %}
+
+{% for categorie_questions in categories %}
+
+
+ <ul>
+<li class="cd-faq-title">{{ categorie_questions }}
+   <ul id="{{questions.categorie}}" class="cd-faq-group">
+
+
+{% for questions in question %}
+{% if questions["status"] == 1 %}
+{% if questions["categorie"] ==  categorie_questions %}
+
+      <li>
+        <a class="cd-faq-trigger" href="#0">{{ questions["question"] }}</a>
+        <div class="cd-faq-content">
+          <p>{{ questions["answer"] }}</p>
+        </div>
+      </li>
+
+   {% endif %}
+
+    {% endif %}
+{% endfor %}
+</ul>
+ </li>
+  </ul>
+{% endfor %}
+
+{% endfor %}
+
+
+</div>
+</section>
+
+
+<footer class="modal-footer card-footer blockquote-footer">
+</footer>
+<script type="text/javascript" src="media/bootstrap/js/bootstrap.js"></script>
+
+<!-- js -->
+<script src="js/jquery-2.1.1.js"></script>
+<script src="js/jquery.mobile.custom.min.js"></script>
+<script src="js/main.js"></script> <!-- Resource jQuery -->
+
+
+</body>
+</html>

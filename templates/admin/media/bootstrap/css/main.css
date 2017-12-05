@@ -1,0 +1,46 @@
+body {
+  background-color: #f3f3f5;
+  color: #a9c056;
+}
+.navbar {
+  background-color: #a9c056;
+  color: #ffffff;
+}
+.navbar ul li{
+  list-style-type: none;
+}
+.navbar ul li a{
+  color: #ffffff;
+}
+.navbar ul li a:hover {
+  color: #d7e89d;
+  text-decoration: none;
+}
+table {
+
+}
+table tr th {
+  background-color: #a9c056;
+  color: #ffffff;
+  border: 2px solid #42464b;
+  padding: 15px 25px;
+}
+
+table tr td {
+  border: 2px solid #42464b;
+ padding: 12px 25px;
+}
+
+footer {
+  margin-top: 250px;
+  margin-bottom: 0;
+
+}
+.question_table tr th {
+  text-align: center;
+}
+
+
+.question_table tr td  a {
+  margin: 10px 20px 10px 20px;
+}

@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+     <link rel="stylesheet" href="media/bootstrap/css/bootstrap.css"> <!-- CSS bootstrap -->
+      <link rel="stylesheet" href="media/bootstrap/css/main.css">  <!-- CSS main -->
+   <!--  <link rel="stylesheet" href="css/style.css">  --><!-- Resource style -->
+    <script src="js/modernizr.js"></script> <!-- Modernizr -->
+    <title>admin</title>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container">
+     <h1>hi admin!!!</h1>
+<ul>
+    <li><a href="admin.php?cat=admins">Все администраторы</a></li>
+    <li><a href="admin.php?cat=new_admin">Создать нового администратора</a></li>
+    <li><a href="topics.php?cat=topics">Все темы</a></li>
+    <li><a href="topics.php?cat=topics">Создать новую тему</a></li>
+   <!--  <li><a href="../users/user.php">User</a></li> -->
+
+</ul>
+
+
+</div>
+</header>
+
+<!--   Создать нового администратора-->
+{% if cat == "admins" %}
+<section>
+<div class="container">
+    <h1>Администраторы</h1><br>
+    <p>{{ send }}</p>
+   <table>
+        <tr>
+            <th>Логин</th>
+            <th>Пароль</th>
+            <th>Изменить пароль</th>
+            <th>Удалить администратора</th>
+        </tr>
+<tr>
+
+{% for i, admin in admins %}
+
+<td>{{ admin.login }}</td>
+<td>{{ admin.password }}</td>
+<td>
+  <form method="POST" name="change_password">
+    <input type="hidden" name="id" value="{{ admin.id }}" >
+    <input type="password" name="password" placeholder="Пароль">
+    <input type="submit" name="save_password" value="Сохранить">
+</form>
+</td>
+
+<td><form method="POST">
+     <input type="hidden" name="login" value="{{ admin.login }}" >
+     <input type="hidden" name="id" value="{{ admin.id }}" >
+     <input type="submit" name="remove_admin" value="Удалить">
+   </form>
+</td>
+</tr>
+
+{% endfor %}
+</table>
+
+</div>
+</section>
+{% endif %}
+
+
+{% if cat == "new_admin" %}
+<section>
+<div class="container">
+  <h1>Создать нового администратора</h1>
+  <p>{{ send }}</p>
+<form method="POST" name="new_admin">
+    <input type="text" name="login" placeholder="Логин">
+    <input type="password" name="password" placeholder="Пароль">
+    <input type="submit" name="create_admin" value="Создать">
+</form>
+  </div>
+</section>
+{% endif %}
+
+
+
+{% if cat == "topics" %}
+<section>
+<div class="container">
+  <h1>Все темы</h1>
+  <p>{{ send }}</p>
+ <table>
+        <tr>
+            <th>темы</th>
+            <th>Всего вопросов</th>
+            <th>Опубликовано</th>
+            <th>Без ответов</th>
+            <th>Удалить тему и все вопросы</th>
+            <th>Информация о вопросах</th>
+           <!--  Просматривать вопросы в каждой теме -->
+        </tr>
+<tr>
+{% for categorie in categories %}
+<tr><td><a class="selected" href="?id_categorie={{categorie.id}}">{{categorie["categorie"] }}</a></td></tr>
+  {% endfor %}
+ <table>
+
+  </div>
+</section>
+{% endif %}
+
+
+
+
+
+
+<footer class="modal-footer card-footer blockquote-footer">
+</footer>
+<script type="text/javascript" src="media/bootstrap/js/bootstrap.js"></script>
+
+</body>
+</html>

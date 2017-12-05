@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+     <link rel="stylesheet" href="media/bootstrap/css/bootstrap.css"> <!-- CSS bootstrap -->
+      <link rel="stylesheet" href="media/bootstrap/css/main.css">  <!-- CSS main -->
+   <!--  <link rel="stylesheet" href="css/style.css">  --><!-- Resource style -->
+    <script src="js/modernizr.js"></script> <!-- Modernizr -->
+    <title>admin</title>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container">
+     <h1>hi admin!!!</h1>
+<ul>
+    <li><a href="admin.php?cat=admins">Все администраторы</a></li>
+    <li><a href="admin.php?cat=new_admin">Создать нового администратора</a></li>
+    <li><a href="topics.php?cat=topics">Все темы</a></li>
+    <li><a href="topics.php?cat=new_topics">Создать новую тему</a></li>
+   <!--  <li><a href="topics.php?">Выйти</a></li> -->
+</ul>
+
+
+</div>
+</header>
+
+
+
+
+<section>
+<div class="container">
+  <h1>Все вопросы к теме {{ chooseCategorie }}</h1>
+  <p>{{ send }}</p>
+ <table class="question_table">
+        <tr>
+            <th>Вопросы</th>
+            <th>Дату создания</th>
+            <th>Статус</th>
+            <th>Действия</th>
+        </tr>
+<tr>
+{% for keys, categorie_topics in categories %}
+<tr>
+
+    <td>{{categorie_topics["question"] }}</td>
+ <td>{{categorie_topics["data"]}}</td>
+ <td>
+
+<!-- Статус: 0-ожидает ответа / 1-опубликован / 2-скрыт -->
+  {% if categorie_topics["status"] == 0 %}
+ожидает ответа
+
+{% endif %}
+
+  {% if categorie_topics["status"] == 1 %}
+опубликован
+
+{% endif %}
+
+  {% if categorie_topics["status"] == 2 %}
+скрыт
+
+{% endif %}
+</td>
+  <td><a class="selected" href="question.php?act=reply&id_categorie=">Ответить</a>
+    <a class="selected" href="question.php?act=remove&id_categorie=">Удалить</a>
+  <a class="selected" href="question.php?act=edit&id_categorie=">Редактировать</a></td></td>
+</tr>
+
+  {% endfor %}
+ <table>
+
+  </div>
+</section>
+
+
+
+
+<footer class="modal-footer card-footer blockquote-footer">
+</footer>
+<script type="text/javascript" src="media/bootstrap/js/bootstrap.js"></script>
+
+</body>
+</html>

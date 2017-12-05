@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+     <link rel="stylesheet" href="media/bootstrap/css/bootstrap.css"> <!-- CSS bootstrap -->
+      <link rel="stylesheet" href="media/bootstrap/css/main.css">  <!-- CSS main -->
+   <!--  <link rel="stylesheet" href="css/style.css">  --><!-- Resource style -->
+    <script src="js/modernizr.js"></script> <!-- Modernizr -->
+    <title>admin</title>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container">
+     <h1>hi admin!!!</h1>
+<ul>
+    <li><a href="admin.php?cat=admins">Все администраторы</a></li>
+    <li><a href="admin.php?cat=new_admin">Создать нового администратора</a></li>
+    <li><a href="topics.php?cat=topics">Все темы</a></li>
+    <li><a href="topics.php?cat=new_topics">Создать новую тему</a></li>
+  <!--   <li><a href="topics.php?">Выйти</a></li> -->
+</ul>
+
+
+</div>
+</header>
+
+
+
+
+{% if cat == "new_topics" %}
+<section>
+<div class="container">
+  <h1>Создать новую тему</h1>
+  <p>{{ send }}
+<form method="POST" name="new_topics">
+    <input type="text" name="new_topics" placeholder="Название темы">
+    <input type="submit" name="create_topics" value="Создать">
+</form></p>
+  </div>
+</section>
+{% endif %}
+
+
+
+
+
+
+<section>
+<div class="container">
+  <h1>Все темы</h1>
+  <p>{{ send }}</p>
+ <table>
+        <tr>
+            <th>темы</th>
+            <th>Всего вопросов</th>
+            <th>Опубликовано</th>
+            <th>Без ответов</th>
+            <th>Удалить тему и все вопросы</th>
+            <th>Информация о вопросах</th>
+           <!--  Просматривать вопросы в каждой теме -->
+        </tr>
+<tr>
+{% for keys, categorie_topics in categorie %}
+<tr>
+
+    <td>{{categorie_topics.categorie }}</td>
+ <td>{{questions_total[keys]}}</td>
+ <td>{{published_question[keys]}}</td>
+ <td>{{unanswered_question[keys]}}</td>
+
+  <td><a class="selected" href="topics.php?act=remove_topic&id_categorie={{keys}}">Удалить</a></td></td>
+ <td><a class="selected" href="question.php?id_categorie={{keys}}&categorie={{categorie_topics.categorie}}">Подробнее</a></td></td>
+</tr>
+
+  {% endfor %}
+
+ <table>
+
+  </div>
+</section>
+
+
+
+
+
+
+
+<footer class="modal-footer card-footer blockquote-footer">
+</footer>
+<script type="text/javascript" src="media/bootstrap/js/bootstrap.js"></script>
+
+</body>
+</html>
